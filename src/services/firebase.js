@@ -1,5 +1,5 @@
-import firebase from "firebase";
-import "firebase/firestore";
+import { initializeApp } from "firebase/app";
+import { getFirestore } from "firebase/firestore";
 
 const firebaseConfig = {
   apiKey: "AIzaSyBIyElvEgYpU9_fV92RTTr84ZXhM4oLUZg",
@@ -7,11 +7,9 @@ const firebaseConfig = {
   projectId: "trabalho4-crud",
   storageBucket: "trabalho4-crud.firebasestorage.app",
   messagingSenderId: "616459405949",
-  appId: "1:616459405949:web:188dd27f1acb59b5afff14"
+  appId: "1:616459405949:web:188dd27f1acb59b5afff14",
 };
 
-if (!firebase.apps.length) {
-  firebase.initializeApp(firebaseConfig);
-}
+const app = initializeApp(firebaseConfig);
 
-export default firebase;
+export const db = getFirestore(app);
