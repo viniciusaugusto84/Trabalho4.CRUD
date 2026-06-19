@@ -16,9 +16,14 @@ export default function Layout() {
         options={{ title: "Início" }}
       />
       <Stack.Screen
-        name="perfil"
-        options={{ title: "Perfil" }}
-      />
+  name="meu-perfil"
+  options={{ title: "Meu Perfil" }}
+/>
+
+<Stack.Screen
+  name="usuarios"
+  options={{ title: "Usuários" }}
+/>
       <Stack.Screen
         name="noticias"
         options={{ title: "Notícias" }}

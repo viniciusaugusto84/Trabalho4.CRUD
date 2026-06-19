@@ -22,13 +22,20 @@ export default function Home() {
 
       <Button
         title="Meu Perfil"
-        onPress={() => router.push("/perfil")}
+        onPress={() => router.push("/meu-perfil")}
       />
 
-      <View style={{ height: 20 }} />
+      <View style={{ height: 15 }} />
 
       <Button
-        title="Analisar Notícias"
+        title="Usuários Cadastrados"
+        onPress={() => router.push("/usuarios")}
+      />
+
+      <View style={{ height: 15 }} />
+
+      <Button
+        title="Notícias"
         onPress={() => router.push("/noticias")}
       />
     </View>
