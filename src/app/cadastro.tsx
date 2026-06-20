@@ -2,8 +2,19 @@ import { View, Text, TextInput, Button, Alert } from "react-native";
 import { useState } from "react";
 import { router } from "expo-router";
 
-import { collection, addDoc } from "firebase/firestore";
-import { db } from "../services/firebase";
+import {
+  createUserWithEmailAndPassword,
+} from "firebase/auth";
+
+import {
+  collection,
+  addDoc,
+} from "firebase/firestore";
+
+import {
+  auth,
+  db,
+} from "../services/firebase";
 
 export default function Cadastro() {
   const [nome, setNome] = useState("");
@@ -12,22 +23,37 @@ export default function Cadastro() {
 
   async function salvarUsuario() {
     try {
-      await addDoc(collection(db, "usuarios"), {
-        nome,
-        email,
-        senha,
-      });
+      const credencial =
+        await createUserWithEmailAndPassword(
+          auth,
+          email,
+          senha
+        );
 
-      Alert.alert("Sucesso", "Usuário cadastrado!");
+      await addDoc(
+        collection(db, "usuarios"),
+        {
+          uid: credencial.user.uid,
+          nome,
+          email,
+        }
+      );
+
+      Alert.alert(
+        "Sucesso",
+        "Usuário cadastrado!"
+      );
 
       setNome("");
       setEmail("");
       setSenha("");
 
       router.push("/");
-    } catch (error) {
-      console.error(error);
-      Alert.alert("Erro", "Não foi possível cadastrar.");
+    } catch (error: any) {
+      Alert.alert(
+        "Erro",
+        error.message
+      );
     }
   }
 
@@ -89,4 +115,4 @@ export default function Cadastro() {
       />
     </View>
   );
-}
+}      

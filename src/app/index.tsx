@@ -1,10 +1,30 @@
-import { View, Text, TextInput, TouchableOpacity } from "react-native";
+import { View, Text, TextInput, TouchableOpacity, Alert } from "react-native";
 import { useState } from "react";
 import { router } from "expo-router";
+
+import { signInWithEmailAndPassword } from "firebase/auth";
+import { auth } from "../services/firebase";
 
 export default function Login() {
   const [email, setEmail] = useState("");
   const [senha, setSenha] = useState("");
+
+  async function login() {
+    try {
+      await signInWithEmailAndPassword(
+        auth,
+        email,
+        senha
+      );
+
+      router.push("/home");
+    } catch (error) {
+      Alert.alert(
+        "Erro",
+        "Email ou senha inválidos."
+      );
+    }
+  }
 
   return (
     <View
@@ -67,7 +87,7 @@ export default function Login() {
       />
 
       <TouchableOpacity
-        onPress={() => router.push("/home")}
+        onPress={login}
         style={{
           backgroundColor: "#2563EB",
           padding: 15,

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   View,
   Text,
@@ -7,14 +7,66 @@ import {
   Alert,
 } from "react-native";
 
+import { auth, db } from "../services/firebase";
+
+import {
+  collection,
+  query,
+  where,
+  getDocs,
+} from "firebase/firestore";
+
 export default function MeuPerfil() {
   const [usuario, setUsuario] = useState({
-    nome: "Usuário Logado",
-    email: "usuario@email.com",
+    nome: "",
+    email: "",
   });
 
-  const [nome, setNome] = useState(usuario.nome);
-  const [email, setEmail] = useState(usuario.email);
+  const [nome, setNome] = useState("");
+  const [email, setEmail] = useState("");
+
+  useEffect(() => {
+    async function carregarPerfil() {
+      try {
+        const uid = auth.currentUser?.uid;
+
+        if (!uid) {
+          Alert.alert(
+            "Erro",
+            "Nenhum usuário logado."
+          );
+          return;
+        }
+
+        const q = query(
+          collection(db, "usuarios"),
+          where("uid", "==", uid)
+        );
+
+        const resultado = await getDocs(q);
+
+        resultado.forEach((documento) => {
+          const dados = documento.data();
+
+          setUsuario({
+            nome: dados.nome,
+            email: dados.email,
+          });
+
+          setNome(dados.nome);
+          setEmail(dados.email);
+        });
+      } catch (error) {
+        console.error(error);
+        Alert.alert(
+          "Erro",
+          "Não foi possível carregar o perfil."
+        );
+      }
+    }
+
+    carregarPerfil();
+  }, []);
 
   function salvarAlteracoes() {
     setUsuario({
@@ -22,22 +74,28 @@ export default function MeuPerfil() {
       email,
     });
 
-    Alert.alert("Sucesso", "Perfil atualizado com sucesso!");
+    Alert.alert(
+      "Sucesso",
+      "Perfil atualizado com sucesso!"
+    );
   }
 
-function excluirConta() {
-  setUsuario({
-    nome: "",
-    email: "",
-  });
+  function excluirConta() {
+    setUsuario({
+      nome: "",
+      email: "",
+    });
 
-  setNome("");
-  setEmail("");
+    setNome("");
+    setEmail("");
 
-  Alert.alert("Sucesso", "Conta excluída.");
-}
+    Alert.alert(
+      "Sucesso",
+      "Conta excluída."
+    );
+  }
 
-return (
+  return (
     <View
       style={{
         flex: 1,
