@@ -1,4 +1,4 @@
-import { View, Text, Button } from "react-native";
+import { View, Text, TouchableOpacity } from "react-native";
 import { router } from "expo-router";
 
 export default function Home() {
@@ -6,38 +6,81 @@ export default function Home() {
     <View
       style={{
         flex: 1,
-        justifyContent: "center",
         padding: 20,
+        backgroundColor: "#F8FAFC",
+        justifyContent: "center",
       }}
     >
       <Text
         style={{
-          fontSize: 28,
+          fontSize: 32,
+          fontWeight: "bold",
           textAlign: "center",
+          color: "#2563EB",
           marginBottom: 40,
         }}
       >
-        Detector de Fake News
+        📰 Detector de Fake News
       </Text>
 
-      <Button
-        title="Meu Perfil"
+      <TouchableOpacity
         onPress={() => router.push("/meu-perfil")}
-      />
+        style={{
+          backgroundColor: "#2563EB",
+          padding: 20,
+          borderRadius: 15,
+          marginBottom: 15,
+        }}
+      >
+        <Text
+          style={{
+            color: "#FFF",
+            fontSize: 18,
+            fontWeight: "bold",
+          }}
+        >
+          👤 Meu Perfil
+        </Text>
+      </TouchableOpacity>
 
-      <View style={{ height: 15 }} />
-
-      <Button
-        title="Usuários Cadastrados"
+      <TouchableOpacity
         onPress={() => router.push("/usuarios")}
-      />
+        style={{
+          backgroundColor: "#1E40AF",
+          padding: 20,
+          borderRadius: 15,
+          marginBottom: 15,
+        }}
+      >
+        <Text
+          style={{
+            color: "#FFF",
+            fontSize: 18,
+            fontWeight: "bold",
+          }}
+        >
+          👥 Usuários Cadastrados
+        </Text>
+      </TouchableOpacity>
 
-      <View style={{ height: 15 }} />
-
-      <Button
-        title="Notícias"
+      <TouchableOpacity
         onPress={() => router.push("/noticias")}
-      />
+        style={{
+          backgroundColor: "#0F172A",
+          padding: 20,
+          borderRadius: 15,
+        }}
+      >
+        <Text
+          style={{
+            color: "#FFF",
+            fontSize: 18,
+            fontWeight: "bold",
+          }}
+        >
+          📰 Notícias
+        </Text>
+      </TouchableOpacity>
     </View>
   );
 }

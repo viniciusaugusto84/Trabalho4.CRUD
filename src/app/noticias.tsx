@@ -186,12 +186,15 @@ export default function Noticias() {
         keyExtractor={(item) => item.id}
         renderItem={({ item }) => (
           <View
-            style={{
-              borderWidth: 1,
-              padding: 10,
-              marginBottom: 10,
-            }}
-          >
+  style={{
+    backgroundColor: "#FFFFFF",
+    borderRadius: 12,
+    padding: 15,
+    marginBottom: 12,
+    borderWidth: 1,
+    borderColor: "#E2E8F0",
+  }}
+>
             <Text>
               Título: {item.titulo}
             </Text>
@@ -200,9 +203,15 @@ export default function Noticias() {
               Fonte: {item.fonte}
             </Text>
 
-            <Text>
-              Classificação: {item.classificacao}
-            </Text>
+           <Text
+  style={{
+    color: "#DC2626",
+    fontWeight: "bold",
+    marginTop: 5,
+  }}
+>
+  Classificação: {item.classificacao}
+</Text>
 
             <View style={{ marginTop: 10 }}>
               <Button

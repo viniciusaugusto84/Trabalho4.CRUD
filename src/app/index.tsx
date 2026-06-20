@@ -1,4 +1,4 @@
-import { View, Text, TextInput, Button } from "react-native";
+import { View, Text, TextInput, TouchableOpacity } from "react-native";
 import { useState } from "react";
 import { router } from "expo-router";
 
@@ -11,17 +11,30 @@ export default function Login() {
       style={{
         flex: 1,
         justifyContent: "center",
-        padding: 20,
+        padding: 25,
+        backgroundColor: "#F8FAFC",
       }}
     >
       <Text
         style={{
-          fontSize: 28,
+          fontSize: 34,
+          fontWeight: "bold",
           textAlign: "center",
-          marginBottom: 30,
+          color: "#2563EB",
+          marginBottom: 10,
         }}
       >
-        Detector de Fake News
+        📰 Fake News
+      </Text>
+
+      <Text
+        style={{
+          textAlign: "center",
+          marginBottom: 40,
+          color: "#64748B",
+        }}
+      >
+        Ajudando idosos a identificar informações falsas
       </Text>
 
       <TextInput
@@ -29,35 +42,68 @@ export default function Login() {
         value={email}
         onChangeText={setEmail}
         style={{
+          backgroundColor: "#FFF",
           borderWidth: 1,
-          padding: 10,
-          marginBottom: 10,
+          borderColor: "#E2E8F0",
+          borderRadius: 12,
+          padding: 14,
+          marginBottom: 12,
         }}
       />
 
       <TextInput
         placeholder="Senha"
-        value={senha}
         secureTextEntry
+        value={senha}
         onChangeText={setSenha}
         style={{
+          backgroundColor: "#FFF",
           borderWidth: 1,
-          padding: 10,
+          borderColor: "#E2E8F0",
+          borderRadius: 12,
+          padding: 14,
           marginBottom: 20,
         }}
       />
 
-      <Button
-        title="Entrar"
+      <TouchableOpacity
         onPress={() => router.push("/home")}
-      />
+        style={{
+          backgroundColor: "#2563EB",
+          padding: 15,
+          borderRadius: 12,
+          marginBottom: 10,
+        }}
+      >
+        <Text
+          style={{
+            color: "#FFF",
+            textAlign: "center",
+            fontWeight: "bold",
+          }}
+        >
+          Entrar
+        </Text>
+      </TouchableOpacity>
 
-      <View style={{ marginTop: 15 }}>
-        <Button
-          title="Cadastrar Usuário"
-          onPress={() => router.push("/cadastro")}
-        />
-      </View>
+      <TouchableOpacity
+        onPress={() => router.push("/cadastro")}
+        style={{
+          backgroundColor: "#1E40AF",
+          padding: 15,
+          borderRadius: 12,
+        }}
+      >
+        <Text
+          style={{
+            color: "#FFF",
+            textAlign: "center",
+            fontWeight: "bold",
+          }}
+        >
+          Cadastrar Usuário
+        </Text>
+      </TouchableOpacity>
     </View>
   );
 }
